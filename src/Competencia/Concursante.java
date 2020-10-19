@@ -1,7 +1,6 @@
 package Competencia;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Concursante {
 
@@ -46,6 +45,4 @@ public class Concursante {
 			}
 		}
 	}
-	
-
 }
