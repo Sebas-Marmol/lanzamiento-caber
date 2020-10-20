@@ -31,16 +31,16 @@ public class Concursante {
 	}
 
 	public double calcularConsistencia() {
-		double promedio=0;
-		for(Lanzamiento lanzamiento : lanzamientos) {
-			promedio+=lanzamiento.distanciaEfectiva();
+		double promedio = 0;
+		for (Lanzamiento lanzamiento : lanzamientos) {
+			promedio += lanzamiento.distanciaEfectiva();
 		}
-		promedio/=lanzamientos.size();
-		for(Lanzamiento lanzamiento : lanzamientos) {		
-			consistencia+=(promedio-lanzamiento.distanciaEfectiva())*(promedio-lanzamiento.distanciaEfectiva());
+		promedio /= lanzamientos.size();
+		for (Lanzamiento lanzamiento : lanzamientos) {
+			consistencia += (promedio - lanzamiento.distanciaEfectiva()) * (promedio - lanzamiento.distanciaEfectiva());
 		}
-		consistencia/=lanzamientos.size();
-		consistencia=Math.sqrt(consistencia);
+		consistencia /= lanzamientos.size();
+		consistencia = Math.sqrt(consistencia);
 		return this.consistencia;
 	}
 
@@ -53,7 +53,7 @@ public class Concursante {
 			}
 		}
 	}
-	
+
 	public boolean getDescalificado() {
 		return this.descalificado;
 	}

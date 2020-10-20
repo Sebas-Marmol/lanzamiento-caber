@@ -13,9 +13,9 @@ public class Lanzamiento {
 	}
 
 	public double distanciaEfectiva() {
-		if (angulo > -30 && angulo < 30)
+		if (angulo >= -30 && angulo <= 30)
 			return distancia;
-		if ((angulo > -90 && angulo < -30) || (angulo > 30 && angulo < 90))
+		if ((angulo >= -90 && angulo < -30) || (angulo > 30 && angulo <= 90))
 			return 0.8 * distancia;
 		this.esValido = false;
 		return 0;

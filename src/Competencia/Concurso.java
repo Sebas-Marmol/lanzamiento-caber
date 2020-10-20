@@ -38,9 +38,9 @@ public class Concurso {
 	}
 
 	public void obtenerGanadoresDistancia() {
-		for(Concursante concursante : concursantes) {
-			if(!concursante.getDescalificado()) {
-				
+		for (Concursante concursante : concursantes) {
+			if (!concursante.getDescalificado()) {
+
 			}
 		}
 	}
@@ -51,10 +51,10 @@ public class Concurso {
 		try {
 			archivo = new FileWriter("out/Resumen.out");
 			pw = new PrintWriter(archivo);
-			for(int i : ganadoresConsistencia)
-				pw.print(i+" ");
+			for (int i : ganadoresConsistencia)
+				pw.print(i + " ");
 			pw.print("\n");
-			for(int i : ganadoresDistancia)
+			for (int i : ganadoresDistancia)
 				pw.print(i);
 		} catch (Exception e) {
 			e.printStackTrace();
