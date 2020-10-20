@@ -1,6 +1,9 @@
 package Competencia;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Concurso {
@@ -21,7 +24,7 @@ public class Concurso {
 			int participantes = arch.nextInt();
 			this.concursantes = new Concursante[participantes];
 			for (int i = 0; i < participantes; i++) {
-				Concursante conc = new Concursante();
+				Concursante conc = new Concursante(i);
 				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
 				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
 				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
@@ -33,4 +36,37 @@ public class Concurso {
 			arch.close();
 		}
 	}
+
+	public void obtenerGanadoresDistancia() {
+		for(Concursante concursante : concursantes) {
+			if(!concursante.getDescalificado()) {
+				
+			}
+		}
+	}
+
+	public void generarArchivoSalida() {
+		FileWriter archivo = null;
+		PrintWriter pw = null;
+		try {
+			archivo = new FileWriter("out/Resumen.out");
+			pw = new PrintWriter(archivo);
+			for(int i : ganadoresConsistencia)
+				pw.print(i+" ");
+			pw.print("\n");
+			for(int i : ganadoresDistancia)
+				pw.print(i);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (archivo != null) {
+				try {
+					archivo.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 }
