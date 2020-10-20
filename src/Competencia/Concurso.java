@@ -21,11 +21,11 @@ public class Concurso {
 			int participantes = arch.nextInt();
 			this.concursantes = new Concursante[participantes];
 			for (int i = 0; i < participantes; i++) {
-				Concursante conc=new Concursante();
-				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(),arch.nextDouble()));
-				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(),arch.nextDouble()));
-				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(),arch.nextDouble()));
-				concursantes[i]=conc;
+				Concursante conc = new Concursante();
+				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
+				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
+				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
+				concursantes[i] = conc;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
