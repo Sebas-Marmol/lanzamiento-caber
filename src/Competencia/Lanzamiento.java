@@ -5,6 +5,7 @@ public class Lanzamiento {
 	private double distancia;
 	private double angulo;
 	private boolean esValido;
+	private double distanciaEfectiva;
 
 	public Lanzamiento(double distancia, double angulo) {
 		this.distancia = distancia;
@@ -14,12 +15,19 @@ public class Lanzamiento {
 
 	public double distanciaEfectiva() {
 		if (angulo >= -30 && angulo <= 30)
-			return distancia;
-		if ((angulo >= -90 && angulo < -30) || (angulo > 30 && angulo <= 90))
-			return 0.8 * distancia;
-		this.esValido = false;
-		return 0;
+			distanciaEfectiva = distancia;
+		else if ((angulo >= -90 && angulo < -30) || (angulo > 30 && angulo <= 90))
+			distanciaEfectiva = 0.8 * distancia;
+		else {
+			this.esValido = false;
+			distanciaEfectiva = 0;
+		}
+		return distanciaEfectiva;
 
+	}
+
+	public double getDistanciaEfectiva() {
+		return distanciaEfectiva;
 	}
 
 	public boolean getEsValido() {

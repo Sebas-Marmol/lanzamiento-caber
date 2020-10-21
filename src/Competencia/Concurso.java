@@ -29,6 +29,7 @@ public class Concurso {
 				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
 				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
 				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
+				conc.validarLanzamientos();
 				concursantes[i] = conc;
 			}
 		} catch (Exception e) {
@@ -42,11 +43,11 @@ public class Concurso {
 		ArrayList<Concursante> array = new ArrayList<Concursante>();
 		for (Concursante concursante : concursantes) {
 			int pos;
-			concursante.calcularDistanciaTotal();
-			if (!concursante.getDescalificado()
-					&& (pos = buscarPosDistancia(concursante.getDistanciaTotal(), array)) >= 0) {
-				array.add(pos, concursante);
-				System.out.println(concursante.getIDConcursante());
+			if (!concursante.getDescalificado()) {
+				concursante.calcularDistanciaTotal();
+				if ((pos = buscarPosDistancia(concursante.getDistanciaTotal(), array)) >= 0) {
+					array.add(pos, concursante);
+				}
 			}
 		}
 		for (int i = 0; i < array.size() && i < 3; i++) {
@@ -58,6 +59,36 @@ public class Concurso {
 		int i = 0;
 		while (i < array.size() && i < 3) {
 			if (distancia > array.get(i).getDistanciaTotal())
+				return i;
+			i++;
+		}
+		if (i < 3)
+			return i;
+		return -1;
+
+	}
+
+	public void obtenerGanadoresConsistencia() {
+		ArrayList<Concursante> array = new ArrayList<Concursante>();
+		for (Concursante concursante : concursantes) {
+			int pos;
+			if (!concursante.getDescalificado()) {
+				concursante.calcularConsistencia();
+				if ((pos = buscarPosConsistencia(concursante.getConsistencia(), array)) >= 0) {
+					array.add(pos, concursante);
+					System.out.println(concursante.getConsistencia());
+				}
+			}
+		}
+		for (int i = 0; i < array.size() && i < 3; i++) {
+			this.ganadoresConsistencia[i] = array.get(i).getIDConcursante();
+		}
+	}
+
+	private int buscarPosConsistencia(double consistencia, ArrayList<Concursante> array) {
+		int i = 0;
+		while (i < array.size() && i < 3) {
+			if (consistencia < array.get(i).getConsistencia())
 				return i;
 			i++;
 		}

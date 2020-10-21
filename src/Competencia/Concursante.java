@@ -19,6 +19,7 @@ public class Concursante {
 	}
 
 	public void registrarLanzamiento(Lanzamiento lanz) {
+		lanz.distanciaEfectiva();
 		lanzamientos.add(lanz);
 	}
 
@@ -26,11 +27,7 @@ public class Concursante {
 		if (descalificado)
 			return 0;
 		for (Lanzamiento lanzamiento : lanzamientos) {
-			this.distanciaTotal += lanzamiento.distanciaEfectiva();
-			if (!lanzamiento.getEsValido()) {
-				descalificado = true;
-				return 0;
-			}
+			this.distanciaTotal += lanzamiento.getDistanciaEfectiva();
 		}
 		return this.distanciaTotal;
 	}
@@ -40,19 +37,26 @@ public class Concursante {
 			return 0;
 		double promedio = 0;
 		for (Lanzamiento lanzamiento : lanzamientos) {
-			promedio += lanzamiento.distanciaEfectiva();
-			if (!lanzamiento.getEsValido()) {
-				descalificado = true;
-				return 0;
-			}
+			promedio += lanzamiento.getDistanciaEfectiva();
 		}
 		promedio /= lanzamientos.size();
 		for (Lanzamiento lanzamiento : lanzamientos) {
-			consistencia += (promedio - lanzamiento.distanciaEfectiva()) * (promedio - lanzamiento.distanciaEfectiva());
+			consistencia += (promedio - lanzamiento.getDistanciaEfectiva())
+					* (promedio - lanzamiento.getDistanciaEfectiva());
 		}
 		consistencia /= lanzamientos.size();
 		consistencia = Math.sqrt(consistencia);
 		return this.consistencia;
+	}
+
+	public void validarLanzamientos() {
+
+		for (Lanzamiento lanzamiento : lanzamientos) {
+			if (!lanzamiento.getEsValido()) {
+				this.descalificado = true;
+				return;
+			}
+		}
 	}
 
 	public double getConsistencia() {

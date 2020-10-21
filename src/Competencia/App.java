@@ -6,6 +6,7 @@ public class App {
 		Concurso concurso = new Concurso();
 		concurso.obtenerConcursantesArchivo();
 		concurso.obtenerGanadoresDistancia();
+		concurso.obtenerGanadoresConsistencia();
 		concurso.generarArchivoSalida();
 	}
 
