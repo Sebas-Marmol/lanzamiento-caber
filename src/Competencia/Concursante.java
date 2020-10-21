@@ -23,17 +23,28 @@ public class Concursante {
 	}
 
 	public double calcularDistanciaTotal() {
-
+		if (descalificado)
+			return 0;
 		for (Lanzamiento lanzamiento : lanzamientos) {
 			this.distanciaTotal += lanzamiento.distanciaEfectiva();
+			if (!lanzamiento.getEsValido()) {
+				descalificado = true;
+				return 0;
+			}
 		}
 		return this.distanciaTotal;
 	}
 
 	public double calcularConsistencia() {
+		if (descalificado)
+			return 0;
 		double promedio = 0;
 		for (Lanzamiento lanzamiento : lanzamientos) {
 			promedio += lanzamiento.distanciaEfectiva();
+			if (!lanzamiento.getEsValido()) {
+				descalificado = true;
+				return 0;
+			}
 		}
 		promedio /= lanzamientos.size();
 		for (Lanzamiento lanzamiento : lanzamientos) {
@@ -44,14 +55,16 @@ public class Concursante {
 		return this.consistencia;
 	}
 
-	public void validarLanzamientos() {
+	public double getConsistencia() {
+		return consistencia;
+	}
 
-		for (Lanzamiento lanzamiento : lanzamientos) {
-			if (!lanzamiento.getEsValido()) {
-				this.descalificado = true;
-				return;
-			}
-		}
+	public int getIDConcursante() {
+		return IDConcursante;
+	}
+
+	public double getDistanciaTotal() {
+		return distanciaTotal;
 	}
 
 	public boolean getDescalificado() {
