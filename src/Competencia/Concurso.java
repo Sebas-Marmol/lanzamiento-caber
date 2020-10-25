@@ -15,7 +15,7 @@ public class Concurso {
 	private int[] ganadoresConsistencia;
 
 	public Concurso(String nombreArchivo) {
-		this.nombreArchivo=nombreArchivo;
+		this.nombreArchivo = nombreArchivo;
 		ganadoresDistancia = new int[3];
 		ganadoresConsistencia = new int[3];
 	}
@@ -23,7 +23,7 @@ public class Concurso {
 	public void obtenerConcursantesArchivo() {
 		Scanner arch = null;
 		try {
-			arch = new Scanner(new File("in/"+this.nombreArchivo+".in")).useLocale(Locale.US);
+			arch = new Scanner(new File("in/" + this.nombreArchivo + ".in")).useLocale(Locale.US);
 			int participantes = arch.nextInt();
 			concursantes = new Concursante[participantes];
 			for (int i = 0; i < participantes; i++) {
@@ -104,7 +104,7 @@ public class Concurso {
 		FileWriter archivo = null;
 		PrintWriter pw = null;
 		try {
-			archivo = new FileWriter("out/"+nombre+".out");
+			archivo = new FileWriter("out/" + nombre + ".out");
 			pw = new PrintWriter(archivo);
 			for (int i : ganadoresConsistencia)
 				if (i != 0)
