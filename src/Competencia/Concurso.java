@@ -5,15 +5,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Concurso {
-
+	private String nombreArchivo;
 	private Concursante[] concursantes;
 	private int[] ganadoresDistancia;
 	private int[] ganadoresConsistencia;
 
-	public Concurso() {
+	public Concurso(String nombreArchivo) {
+		this.nombreArchivo=nombreArchivo;
 		ganadoresDistancia = new int[3];
 		ganadoresConsistencia = new int[3];
 	}
@@ -21,7 +23,7 @@ public class Concurso {
 	public void obtenerConcursantesArchivo() {
 		Scanner arch = null;
 		try {
-			arch = new Scanner(new File("in/DatosConcurso.in"));
+			arch = new Scanner(new File("in/"+this.nombreArchivo+".in")).useLocale(Locale.US);
 			int participantes = arch.nextInt();
 			concursantes = new Concursante[participantes];
 			for (int i = 0; i < participantes; i++) {
@@ -98,11 +100,11 @@ public class Concurso {
 
 	}
 
-	public void generarArchivoSalida() {
+	public void generarArchivoSalida(String nombre) {
 		FileWriter archivo = null;
 		PrintWriter pw = null;
 		try {
-			archivo = new FileWriter("out/Ganadores.out");
+			archivo = new FileWriter("out/"+nombre+".out");
 			pw = new PrintWriter(archivo);
 			for (int i : ganadoresConsistencia)
 				if (i != 0)
@@ -123,5 +125,4 @@ public class Concurso {
 			}
 		}
 	}
-
 }
