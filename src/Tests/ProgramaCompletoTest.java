@@ -91,7 +91,55 @@ class ProgramaCompletoTest {
 	@Test
 	void Caso_04_Test() {
 		String nombre="Caso_04";
-		generarFatiga(nombre);
+		//generarFatiga(nombre);
+		Concurso concurso = new Concurso("pruebas/"+nombre);
+		concurso.obtenerConcursantesArchivo();
+		concurso.obtenerGanadoresDistancia();
+		concurso.obtenerGanadoresConsistencia();
+		concurso.generarArchivoSalida("pruebas/"+nombre);
+		Scanner esperado=null;
+		Scanner salida=null;
+		try {
+			esperado=new Scanner(new File("out/pruebas/esperados/"+nombre+".out")).useLocale(Locale.US);
+			salida=new Scanner(new File("out/pruebas/"+nombre+".out")).useLocale(Locale.US);
+			while(esperado.hasNextDouble() && salida.hasNextDouble()) {
+				assertEquals(esperado.nextDouble(),salida.nextDouble());
+			}
+			if((esperado.hasNextDouble() && !salida.hasNextDouble()) || (!esperado.hasNextDouble() && salida.hasNextDouble()))
+				fail("Distintas cantidades de caracteres");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			fail("Falta archivo");
+		}
+	}
+	
+	@Test
+	void Caso_05_Test() {
+		String nombre="Caso_05";
+		Concurso concurso = new Concurso("pruebas/"+nombre);
+		concurso.obtenerConcursantesArchivo();
+		concurso.obtenerGanadoresDistancia();
+		concurso.obtenerGanadoresConsistencia();
+		concurso.generarArchivoSalida("pruebas/"+nombre);
+		Scanner esperado=null;
+		Scanner salida=null;
+		try {
+			esperado=new Scanner(new File("out/pruebas/esperados/"+nombre+".out")).useLocale(Locale.US);
+			salida=new Scanner(new File("out/pruebas/"+nombre+".out")).useLocale(Locale.US);
+			while(esperado.hasNextDouble() && salida.hasNextDouble()) {
+				assertEquals(esperado.nextDouble(),salida.nextDouble());
+			}
+			if((esperado.hasNextDouble() && !salida.hasNextDouble()) || (!esperado.hasNextDouble() && salida.hasNextDouble()))
+				fail("Distintas cantidades de caracteres");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			fail("Falta archivo");
+		}
+	}
+	
+	@Test
+	void Caso_06_Test() {
+		String nombre="Caso_06";
 		Concurso concurso = new Concurso("pruebas/"+nombre);
 		concurso.obtenerConcursantesArchivo();
 		concurso.obtenerGanadoresDistancia();
