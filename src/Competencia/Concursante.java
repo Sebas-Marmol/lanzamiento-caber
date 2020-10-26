@@ -24,6 +24,8 @@ public class Concursante {
 	}
 
 	public double calcularDistanciaTotal() {
+		if (descalificado)
+			return 0;
 		for (Lanzamiento lanzamiento : lanzamientos) {
 			this.distanciaTotal += lanzamiento.getDistanciaEfectiva();
 		}
@@ -31,6 +33,8 @@ public class Concursante {
 	}
 
 	public double calcularConsistencia() {
+		if (descalificado)
+			return 0;
 		double promedio = 0;
 		for (Lanzamiento lanzamiento : lanzamientos) {
 			promedio += lanzamiento.getDistanciaEfectiva();
