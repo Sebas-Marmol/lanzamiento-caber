@@ -45,18 +45,16 @@ public class Concurso {
 
 	public void preguntarGanadoresDistancia(Concursante actual) {
 		if (ganadoresDistancia.size() == 0) {
-			if (!actual.getDescalificado())
-				ganadoresDistancia.add(actual);
+			ganadoresDistancia.add(actual);
 		} else {
 			Concursante aux;
 			int i;
 			for (i = 0; i < ganadoresDistancia.size(); i++)
-				if (!actual.getDescalificado())
-					if (ganadoresDistancia.get(i).getDistanciaTotal() < actual.getDistanciaTotal()) {
-						aux = ganadoresDistancia.remove(i);
-						ganadoresDistancia.add(i, actual);
-						actual = aux;
-					}
+				if (ganadoresDistancia.get(i).getDistanciaTotal() < actual.getDistanciaTotal()) {
+					aux = ganadoresDistancia.remove(i);
+					ganadoresDistancia.add(i, actual);
+					actual = aux;
+				}
 			if (i < 3)
 				ganadoresDistancia.add(actual);
 		}
