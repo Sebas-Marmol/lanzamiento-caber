@@ -21,8 +21,6 @@ class ProgramaCompletoTest {
 		String nombre = "Caso_01";
 		Concurso concurso = new Concurso("pruebas/" + nombre);
 		concurso.obtenerConcursantesArchivo();
-		concurso.obtenerGanadoresDistancia();
-		concurso.obtenerGanadoresConsistencia();
 		concurso.generarArchivoSalida("pruebas/" + nombre);
 		Scanner esperado = null;
 		Scanner salida = null;
@@ -46,8 +44,6 @@ class ProgramaCompletoTest {
 		String nombre = "Caso_02";
 		Concurso concurso = new Concurso("pruebas/" + nombre);
 		concurso.obtenerConcursantesArchivo();
-		concurso.obtenerGanadoresDistancia();
-		concurso.obtenerGanadoresConsistencia();
 		concurso.generarArchivoSalida("pruebas/" + nombre);
 		Scanner esperado = null;
 		Scanner salida = null;
@@ -71,8 +67,6 @@ class ProgramaCompletoTest {
 		String nombre = "Caso_03";
 		Concurso concurso = new Concurso("pruebas/" + nombre);
 		concurso.obtenerConcursantesArchivo();
-		concurso.obtenerGanadoresDistancia();
-		concurso.obtenerGanadoresConsistencia();
 		concurso.generarArchivoSalida("pruebas/" + nombre);
 		Scanner esperado = null;
 		Scanner salida = null;
@@ -97,8 +91,6 @@ class ProgramaCompletoTest {
 		// generarFatiga(nombre);
 		Concurso concurso = new Concurso("pruebas/" + nombre);
 		concurso.obtenerConcursantesArchivo();
-		concurso.obtenerGanadoresDistancia();
-		concurso.obtenerGanadoresConsistencia();
 		concurso.generarArchivoSalida("pruebas/" + nombre);
 		Scanner esperado = null;
 		Scanner salida = null;
@@ -122,8 +114,6 @@ class ProgramaCompletoTest {
 		String nombre = "Caso_05";
 		Concurso concurso = new Concurso("pruebas/" + nombre);
 		concurso.obtenerConcursantesArchivo();
-		concurso.obtenerGanadoresDistancia();
-		concurso.obtenerGanadoresConsistencia();
 		concurso.generarArchivoSalida("pruebas/" + nombre);
 		Scanner esperado = null;
 		Scanner salida = null;
@@ -147,8 +137,6 @@ class ProgramaCompletoTest {
 		String nombre = "Caso_06";
 		Concurso concurso = new Concurso("pruebas/" + nombre);
 		concurso.obtenerConcursantesArchivo();
-		concurso.obtenerGanadoresDistancia();
-		concurso.obtenerGanadoresConsistencia();
 		concurso.generarArchivoSalida("pruebas/" + nombre);
 		Scanner esperado = null;
 		Scanner salida = null;
