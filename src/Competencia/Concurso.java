@@ -46,11 +46,11 @@ public class Concurso {
 		for (Concursante concursante : concursantes) {
 			int pos;
 			concursante.validarLanzamientos();
+			concursante.calcularDistanciaTotal();
+			if ((pos = buscarPosDistancia(concursante.getDistanciaTotal(), arrayDistancia)) >= 0) {
+				arrayDistancia.add(pos, concursante);
+			}
 			if (!concursante.getDescalificado()) {
-				concursante.calcularDistanciaTotal();
-				if ((pos = buscarPosDistancia(concursante.getDistanciaTotal(), arrayDistancia)) >= 0) {
-					arrayDistancia.add(pos, concursante);
-				}
 				concursante.calcularConsistencia();
 				if ((pos = buscarPosConsistencia(concursante.getConsistencia(), arrayConsistencia)) >= 0) {
 					arrayConsistencia.add(pos, concursante);
@@ -59,6 +59,8 @@ public class Concurso {
 		}
 		for (int i = 0; i < arrayConsistencia.size() && i < 3; i++) {
 			this.ganadoresConsistencia[i] = arrayConsistencia.get(i);
+		}
+		for (int i = 0; i < arrayDistancia.size() && i < 3; i++) {
 			this.ganadoresDistancia[i] = arrayDistancia.get(i);
 		}
 	}
