@@ -24,6 +24,8 @@ public class Concursante {
 	}
 
 	public double calcularDistanciaTotal() {
+		if (descalificado)
+			return 0;
 		for (Lanzamiento lanzamiento : lanzamientos) {
 			this.distanciaTotal += lanzamiento.getDistanciaEfectiva();
 		}
