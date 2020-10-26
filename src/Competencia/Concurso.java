@@ -11,13 +11,13 @@ import java.util.Scanner;
 public class Concurso {
 	private String nombreArchivo;
 	private Concursante[] concursantes;
-	private int[] ganadoresDistancia;
-	private int[] ganadoresConsistencia;
+	private Concursante[] ganadoresDistancia;
+	private Concursante[] ganadoresConsistencia;
 
 	public Concurso(String nombreArchivo) {
 		this.nombreArchivo = nombreArchivo;
-		ganadoresDistancia = new int[3];
-		ganadoresConsistencia = new int[3];
+		ganadoresDistancia = new Concursante[3];
+		ganadoresConsistencia = new Concursante[3];
 	}
 
 	public void obtenerConcursantesArchivo() {
@@ -31,7 +31,6 @@ public class Concurso {
 				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
 				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
 				conc.registrarLanzamiento(new Lanzamiento(arch.nextDouble(), arch.nextDouble()));
-				conc.validarLanzamientos();
 				concursantes[i] = conc;
 			}
 		} catch (Exception e) {
@@ -41,19 +40,26 @@ public class Concurso {
 		}
 	}
 
-	public void obtenerGanadoresDistancia() {
-		ArrayList<Concursante> array = new ArrayList<Concursante>();
+	public void obtenerPodios() {
+		ArrayList<Concursante> arrayDistancia = new ArrayList<Concursante>();
+		ArrayList<Concursante> arrayConsistencia = new ArrayList<Concursante>();
 		for (Concursante concursante : concursantes) {
 			int pos;
+			concursante.validarLanzamientos();
 			if (!concursante.getDescalificado()) {
 				concursante.calcularDistanciaTotal();
-				if ((pos = buscarPosDistancia(concursante.getDistanciaTotal(), array)) >= 0) {
-					array.add(pos, concursante);
+				if ((pos = buscarPosDistancia(concursante.getDistanciaTotal(), arrayDistancia)) >= 0) {
+					arrayDistancia.add(pos, concursante);
+				}
+				concursante.calcularConsistencia();
+				if ((pos = buscarPosConsistencia(concursante.getConsistencia(), arrayConsistencia)) >= 0) {
+					arrayConsistencia.add(pos, concursante);
 				}
 			}
 		}
-		for (int i = 0; i < array.size() && i < 3; i++) {
-			this.ganadoresDistancia[i] = array.get(i).getIDConcursante();
+		for (int i = 0; i < arrayConsistencia.size() && i < 3; i++) {
+			this.ganadoresConsistencia[i] = arrayConsistencia.get(i);
+			this.ganadoresDistancia[i] = arrayDistancia.get(i);
 		}
 	}
 
@@ -68,23 +74,6 @@ public class Concurso {
 			return i;
 		return -1;
 
-	}
-
-	public void obtenerGanadoresConsistencia() {
-		ArrayList<Concursante> array = new ArrayList<Concursante>();
-		for (Concursante concursante : concursantes) {
-			int pos;
-			if (!concursante.getDescalificado()) {
-				concursante.calcularConsistencia();
-				if ((pos = buscarPosConsistencia(concursante.getConsistencia(), array)) >= 0) {
-					array.add(pos, concursante);
-					System.out.println(concursante.getConsistencia());
-				}
-			}
-		}
-		for (int i = 0; i < array.size() && i < 3; i++) {
-			this.ganadoresConsistencia[i] = array.get(i).getIDConcursante();
-		}
 	}
 
 	private int buscarPosConsistencia(double consistencia, ArrayList<Concursante> array) {
@@ -106,13 +95,13 @@ public class Concurso {
 		try {
 			archivo = new FileWriter("out/" + nombre + ".out");
 			pw = new PrintWriter(archivo);
-			for (int i : ganadoresConsistencia)
-				if (i != 0)
-					pw.print(i + " ");
+			for (Concursante conc : ganadoresConsistencia)
+				if (conc != null)
+					pw.print(conc.getIDConcursante() + " ");
 			pw.print("\n");
-			for (int i : ganadoresDistancia)
-				if (i != 0)
-					pw.print(i + " ");
+			for (Concursante conc : ganadoresDistancia)
+				if (conc != null)
+					pw.print(conc.getIDConcursante() + " ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
